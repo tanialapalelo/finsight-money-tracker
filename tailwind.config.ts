@@ -23,7 +23,7 @@ const config = {
   			fill: {
   				'1': 'rgba(255, 255, 255, 0.10)'
   			},
-  			bankGradient: '#0179FE',
+  			bankGradient: '#4CAF50',
   			indigo: {
   				'500': '#6172F3',
   				'700': '#3538CD'
@@ -110,7 +110,7 @@ const config = {
   			}
   		},
   		backgroundImage: {
-  			'bank-gradient': 'linear-gradient(90deg, #0179FE 0%, #4893FF 100%)',
+  			'bank-gradient': 'linear-gradient(90deg, #4CAF50 0%, #2C3E50 100%)',
   			'bank-green-gradient': 'linear-gradient(90deg, #01797A 0%, #489399 100%)'
   		},
   		boxShadow: {
