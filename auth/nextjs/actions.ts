@@ -81,6 +81,7 @@ export async function signUp(unsafeData: SignUpData) {
   } catch {
     return "Unable to create account"
   }
+  redirect("/")
 }
 
 export async function logOut() {

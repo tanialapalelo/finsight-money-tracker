@@ -1,7 +1,7 @@
 import { userRoles } from "@/drizzle/schema"
 import { z } from "zod"
 import crypto from "crypto"
-// import { redisClient } from "@/redis/redis"
+import { redisClient } from "@/redis/redis"
 
 // Seven days in seconds
 const SESSION_EXPIRATION_SECONDS = 60 * 60 * 24 * 7
@@ -42,9 +42,9 @@ export async function updateUserSessionData(
   const sessionId = cookies.get(COOKIE_SESSION_KEY)?.value
   if (sessionId == null) return null
 
-//   await redisClient.set(`session:${sessionId}`, sessionSchema.parse(user), {
-//     ex: SESSION_EXPIRATION_SECONDS,
-//   })
+  await redisClient.set(`session:${sessionId}`, sessionSchema.parse(user), {
+    ex: SESSION_EXPIRATION_SECONDS,
+  })
 }
 
 export async function createUserSession(
@@ -68,9 +68,9 @@ export async function updateUserSessionExpiration(
   const user = await getUserSessionById(sessionId)
   if (user == null) return
 
-//   await redisClient.set(`session:${sessionId}`, user, {
-//     ex: SESSION_EXPIRATION_SECONDS,
-//   })
+  await redisClient.set(`session:${sessionId}`, user, {
+    ex: SESSION_EXPIRATION_SECONDS,
+  })
   setCookie(sessionId, cookies)
 }
 
@@ -80,7 +80,7 @@ export async function removeUserFromSession(
   const sessionId = cookies.get(COOKIE_SESSION_KEY)?.value
   if (sessionId == null) return null
 
-//   await redisClient.del(`session:${sessionId}`)
+  await redisClient.del(`session:${sessionId}`)
   cookies.delete(COOKIE_SESSION_KEY)
 }
 
@@ -94,9 +94,9 @@ function setCookie(sessionId: string, cookies: Pick<Cookies, "set">) {
 }
 
 async function getUserSessionById(sessionId: string) {
-//   const rawUser = await redisClient.get(`session:${sessionId}`)
+  const rawUser = await redisClient.get(`session:${sessionId}`)
 
-//   const { success, data: user } = sessionSchema.safeParse(rawUser)
+  const { success, data: user } = sessionSchema.safeParse(rawUser)
 
-//   return success ? user : null
+  return success ? user : null
 }
