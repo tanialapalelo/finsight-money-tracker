@@ -14,6 +14,7 @@ export const userRoles = ["admin", "user"] as const
 export type UserRole = (typeof userRoles)[number]
 export const userRoleEnum = pgEnum("user_roles", userRoles)
 
+// Defines the DB table statically (build time)
 export const UserTable = pgTable("users", {
   id: uuid().primaryKey().defaultRandom(),
   firstName: varchar('first_name', { length: 50 }).notNull(),

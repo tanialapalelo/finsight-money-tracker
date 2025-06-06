@@ -1,3 +1,4 @@
+import { getCurrentUser } from "@/auth/nextjs/currentUser";
 import MobileNav from "@/components/MobileNav";
 import Sidebar from "@/components/Sidebar";
 // import { getLoggedInUser } from "@/lib/actions/user.actions";
@@ -9,8 +10,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  const loggedIn = await getCurrentUser({ withFullUser: true })
   // const loggedIn = await getLoggedInUser();
-  const loggedIn = {firstname: "Tania", email: "asda@gmail.com"};
+  // const loggedIn = {firstname: "Tania", email: "asda@gmail.com"};
 
   if(!loggedIn) redirect('/sign-in')
 
