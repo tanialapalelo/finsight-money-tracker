@@ -167,6 +167,7 @@ declare type SearchParamProps = {
   
   declare interface AuthFormProps {
     type: "sign-in" | "sign-up";
+    errorMsg?: string;
   }
   
   declare interface BankDropdownProps {

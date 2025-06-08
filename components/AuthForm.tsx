@@ -14,12 +14,12 @@ import CustomInput from './CustomAuthInput'
 import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { signIn, signUp } from '@/auth/nextjs/actions'
+import { oAuthSignIn, signIn, signUp } from '@/auth/nextjs/actions'
 
-const AuthForm = ({ type }: AuthFormProps) => {
+const AuthForm = ({ type, errorMsg }: AuthFormProps) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string>()
+    const [error, setError] = useState<string>(errorMsg || "")
 
     const formSchema = authFormSchema(type);
 
@@ -81,6 +81,32 @@ const AuthForm = ({ type }: AuthFormProps) => {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 
                     {error && <p className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">{error}</p>}
+                    
+                    <div className='flex gap-4'>
+                        <Button
+                            type="button"
+                            className='w-full border border-double hover:bg-gray-100'
+                            onClick={async () => await oAuthSignIn("discord")}
+                        >
+                            <Image src="/icons/discord.svg" alt="Discord" width={25} height={25} className="rounded-l-xl object-contain m-2" />
+                            Discord
+                        </Button>
+                        <Button
+                            type="button"
+                            className='w-full border border-double hover:bg-gray-100'
+                            onClick={async () => await oAuthSignIn("github")}
+                        >
+                            <Image src="/icons/github.svg" alt="Discord" width={25} height={25} className="rounded-l-xl object-contain m-2" />
+                            GitHub
+                        </Button>
+                    </div>
+                    <div className="flex items-center justify-center my-4">
+                        <div className="w-full h-px bg-gray-300" />
+                        <span className="px-4 text-sm text-gray-500">or</span>
+                        <div className="w-full h-px bg-gray-300" />
+                    </div>
+
+
                     {type === "sign-up" && (
                         <>
                             <div className='flex gap-4'>
@@ -102,7 +128,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     </div>
                 </form>
             </Form>
-            <footer className="flex justify-ccenter gap-1">
+            <footer className="flex justify-center gap-1">
                 <p className='text-14 font-normal text-gray-600'>
                     {type === "sign-in" ? "Don't have an account?" : "Already have an account?"}
                 </p>
