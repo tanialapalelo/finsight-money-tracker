@@ -1,11 +1,16 @@
 import AuthForm from '@/components/AuthForm'
 
-const SignIn = () => {
+export default async function SignIn({
+  searchParams,
+}: {
+  searchParams: Promise<{ oauthError?: string }>
+}) {
+  
+  const { oauthError } = await searchParams
+
   return (
     <section className="flex-center size-full max-sm:px-6">
-      <AuthForm type="sign-in" />
+      <AuthForm type="sign-in" errorMsg={oauthError} />
     </section>
   )
 }
-
-export default SignIn

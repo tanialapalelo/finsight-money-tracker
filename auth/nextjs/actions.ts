@@ -13,6 +13,7 @@ import {
 import { cookies } from "next/headers"
 import { authFormSchema } from "@/lib/utils"
 import { createUserSession, removeUserFromSession } from "../core/session"
+import { getOAuthClient } from "../core/oauth/base"
 
 const signInSchema = authFormSchema("sign-in");
 type SignInData = z.infer<typeof signInSchema>;
@@ -87,4 +88,9 @@ export async function signUp(unsafeData: SignUpData) {
 export async function logOut() {
   await removeUserFromSession(await cookies())
   redirect("/")
+}
+
+export async function oAuthSignIn(provider: OAuthProvider) {
+  const oAuthClient = getOAuthClient(provider)
+  redirect(oAuthClient.createAuthUrl(await cookies()))
 }
