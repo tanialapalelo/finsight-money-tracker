@@ -203,10 +203,10 @@ declare type SearchParamProps = {
   }
   
   declare interface RecentTransactionsProps {
-    accounts: Account[];
-    transactions: Transaction[];
-    appwriteItemId: string;
-    page: number;
+    accounts?: Account[];
+    transactions?: Transaction[];
+    appwriteItemId?: string;
+    page?: number;
   }
   
   declare interface TransactionHistoryTableProps {
