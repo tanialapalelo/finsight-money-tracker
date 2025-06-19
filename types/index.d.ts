@@ -307,3 +307,11 @@ declare type SearchParamProps = {
     accountId: string;
   }
   
+
+  
+  
+export interface CreateBudgetParams {
+  name: string;
+  amount: string;
+  userId: string;
+}
