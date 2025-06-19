@@ -9,6 +9,7 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core"
+import { TransactionTable } from "./transactions"
 
 export const userRoles = ["admin", "user"] as const
 export type UserRole = (typeof userRoles)[number]
@@ -36,6 +37,7 @@ export const UserTable = pgTable("users", {
 
 export const userRelations = relations(UserTable, ({ many }) => ({
   oAuthAccounts: many(UserOAuthAccountTable),
+  transactions: many(TransactionTable),
 }))
 
 export const oAuthProviders = ["discord", "github"] as const

@@ -15,6 +15,20 @@
       "when": 1749380064290,
       "tag": "0001_optimal_hardball",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1750185488008,
+      "tag": "0002_furry_blink",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1750185586400,
+      "tag": "0003_mature_dagger",
+      "breakpoints": true
     }
   ]
 }
