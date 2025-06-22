@@ -43,39 +43,17 @@ const CreateBudget = ({ userId }: Props) => {
       const error = await insertBudget({
         name: data.name,
         amount: data.amount,
+        icon: emojiIcon,
         userId: userId
       });
       console.log(error);
     } catch (error) {
       console.error(error);
-
     } finally {
       console.log("finally");
-      
     }
 
   }
-
-  /**
-   * Used to Create New Budget
-   */
-  // const onCreateBudget = async () => {
-  //   const result = await db
-  //     .insert(Budgets)
-  //     .values({
-  //       name: name,
-  //       amount: amount,
-  //       createdBy: user?.primaryEmailAddress?.emailAddress,
-  //       icon: emojiIcon,
-  //     })
-  //     .returning({ insertedId: Budgets.id });
-
-  //   if (result) {
-  //     refreshData();
-  //     toast("New Budget Created!");
-  //   }
-  // };
-
   return (
     <div>
       <Dialog>

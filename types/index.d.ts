@@ -308,7 +308,17 @@ declare type SearchParamProps = {
   }
   
 
-  
+  export interface BudgetWithStats {
+    id: string;
+    name: string;
+    amount: string;
+    icon: string | null;
+    userId: string;
+    createdAt: Date;
+    totalSpend: number;
+    totalItem: number;
+  };
+
   
 export interface CreateBudgetParams {
   name: string;

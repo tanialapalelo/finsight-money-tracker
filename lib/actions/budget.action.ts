@@ -8,14 +8,12 @@ import { z } from "zod";
 
 export async function insertBudget(budget: z.infer<typeof createBudgetWithUserSchema>) {
     const { success, data } = createBudgetWithUserSchema.safeParse(budget)
-
     if (!success) return "Unable to insert budget.."
-
     try {
-
         const [createdData] = await db.insert(BudgetTable).values({
             name: data.name,
             amount: data.amount,
+            icon: data.icon,
             userId: data.userId,
         }).returning({ id: BudgetTable.id });
 
@@ -23,5 +21,5 @@ export async function insertBudget(budget: z.infer<typeof createBudgetWithUserSc
     } catch {
         return "Unable to insert budget"
     }
-    redirect("/")
+    redirect("/budgets")
 }

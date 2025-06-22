@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from 'react'
 import CreateBudget from './CreateBudget'
-import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
 
 import BudgetItem from './BudgetItem'
+import { getListBudget } from '@/lib/actions/transaction.action'
+import { BudgetWithStats } from '@/types'
 
 interface Props {
   userId: string;
@@ -12,80 +13,35 @@ interface Props {
 
 const BudgetList = ({ userId }: Props) => {
 
-  const [budgetList,setBudgetList]=useState([]);
+  const [budgetList, setBudgetList] = useState<BudgetWithStats[]>([]);
 
   useEffect(() => {
-    console.log("Received userId in client:", userId);
+    userId && getBudgetList();
   }, [userId]);
-  
-  
-  const getBudgetList=async()=>{
 
-    console.log("budgetlist");
-    
-
+  const getBudgetList = async () => {
+    const result = await getListBudget(userId);
+    setBudgetList(result ?? []);
   }
-  const mockBudgets = [
-    {
-      id: "1",
-      name: "Groceries",
-      icon: "🛒",
-      amount: 500,
-      totalSpend: 320,
-      totalItem: 12,
-    },
-    {
-      id: "2",
-      name: "Home Decor",
-      icon: "🏡",
-      amount: 1000,
-      totalSpend: 250,
-      totalItem: 5,
-    },
-    {
-      id: "3",
-      name: "Fitness",
-      icon: "🏋️‍♂️",
-      amount: 300,
-      totalSpend: 275,
-      totalItem: 8,
-    },
-    {
-      id: "4",
-      name: "Entertainment",
-      icon: "🎮",
-      amount: 600,
-      totalSpend: 600,
-      totalItem: 15,
-    },
-    {
-      id: "5",
-      name: "Travel",
-      icon: "✈️",
-      amount: 2000,
-      totalSpend: 1540,
-      totalItem: 7,
-    },
-  ];
 
   return (
     <div className='mt-7'>
-        <div className='grid grid-cols-1
+      <div className='grid grid-cols-1
         md:grid-cols-2 lg:grid-cols-3 gap-5'>
-        <CreateBudget userId={userId}/>
+        <CreateBudget userId={userId} />
 
-        {mockBudgets?.length>0? mockBudgets.map((budget,index)=>(
+        {budgetList?.length > 0 ? budgetList.map((budget, index) => (
           <BudgetItem budget={budget} key={index} />
         ))
-      :[1,2,3,4,5].map((item,index)=>(
-        <div key={index} className='w-full bg-slate-200 rounded-lg
+          : [1, 2, 3, 4, 5].map((item, index) => (
+            <div key={index} className='w-full bg-slate-200 rounded-lg
         h-[150px] animate-pulse'>
 
-        </div>
-      ))
-      }
-        </div>
-       
+            </div>
+          ))
+        }
+      </div>
+
     </div>
   )
 }

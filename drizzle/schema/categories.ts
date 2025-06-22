@@ -6,6 +6,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core"
 import { UserTable } from "./users";
+import { TransactionTable } from "./transactions";
 
 export const CategoryTable = pgTable("categories", {
     id: uuid().primaryKey().defaultRandom(),
@@ -14,9 +15,10 @@ export const CategoryTable = pgTable("categories", {
     createdBy: uuid().references(() => UserTable.id), // Optional: for custom categories
   });
 
-  export const categoryRelations = relations(CategoryTable, ({ one }) => ({
+  export const categoryRelations = relations(CategoryTable, ({ one, many }) => ({
     user: one(UserTable, {
       fields: [CategoryTable.createdBy],
       references: [UserTable.id],
     }),
+    transactions: many(TransactionTable),
   }));

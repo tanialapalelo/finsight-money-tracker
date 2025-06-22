@@ -12,6 +12,7 @@ import {
 } from "drizzle-orm/pg-core"
 import { UserTable } from "./users"
 import { CategoryTable } from "./categories"
+import { BudgetTable } from "./budgets"
 
 export const transactionTypes = ["expense", "income"] as const
 export type TransactionTypes = (typeof transactionTypes)[number]
@@ -25,7 +26,8 @@ export const TransactionTable = pgTable("transactions", {
   currency: varchar("currency", { length: 3 }).notNull(),
   description: text(),
   type: transactionTypesEnum().notNull(),
-  categoryId: uuid().references(() => CategoryTable.id),
+  categoryId: uuid().references(() => CategoryTable.id).notNull(),
+  budgetId: uuid().references(() => BudgetTable.id, { onDelete: 'set null' }),
   date: date("date").notNull(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp({ withTimezone: true })
@@ -45,5 +47,9 @@ export const userTransactionRelationships = relations(
       fields: [TransactionTable.categoryId],
       references: [CategoryTable.id],
     }),
+    budget: one(BudgetTable, {
+      fields: [TransactionTable.budgetId],
+      references: [BudgetTable.id],
+    })
   })
 )
