@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 import CreateBudget from './CreateBudget'
-
 import BudgetItem from './BudgetItem'
 import { getListBudget } from '@/lib/actions/transaction.action'
 import { BudgetWithStats } from '@/types'
@@ -12,7 +11,6 @@ interface Props {
 }
 
 const BudgetList = ({ userId }: Props) => {
-
   const [budgetList, setBudgetList] = useState<BudgetWithStats[]>([]);
 
   useEffect(() => {

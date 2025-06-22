@@ -4,23 +4,6 @@ import { db } from "@/drizzle/db"
 import { BudgetTable, TransactionTable } from "@/drizzle/schema";
 import { desc, eq, getTableColumns, sql } from "drizzle-orm";
 
-// export async function createTransaction(data: Transaction) {
-//     const result  = await db
-//         .insert(data)
-//         .values({
-//         name: name,
-//         amount: amount,
-//         createdBy: user?.primaryEmailAddress?.emailAddress,
-//         icon: emojiIcon,
-//         })
-//         .returning({ insertedId: Incomes.id });
-
-//     if (result) {
-//         refreshData();
-//         toast("New Income Source Created!");
-//     }
-// }
-
 
 export async function getListBudget(userId : string){
     try {
@@ -42,6 +25,4 @@ export async function getListBudget(userId : string){
     } catch (error) {
         console.error("An error occurred while getting the budgets:", error);
     }
-    
-
 }
