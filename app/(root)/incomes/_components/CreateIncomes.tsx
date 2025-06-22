@@ -15,6 +15,7 @@ import EmojiPicker from "emoji-picker-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import AddNewCard from "@/components/AddNewCard";
 
 function CreateIncomes() {
   const [emojiIcon, setEmojiIcon] = useState("😀");
@@ -34,14 +35,7 @@ function CreateIncomes() {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div
-            className="bg-slate-100 p-10 rounded-2xl
-            items-center flex flex-col border-2 border-dashed
-            cursor-pointer hover:shadow-md"
-          >
-            <h2 className="text-3xl">+</h2>
-            <h2>Create New Income Source</h2>
-          </div>
+          <AddNewCard title="Create New Income Source"/>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
