@@ -11,3 +11,8 @@ export const createBudgetSchema = z.object({
 export const createBudgetWithUserSchema = createBudgetSchema.extend({
   userId: z.string(),
 });
+
+export const budgetByIdSchema = z.object({
+  userId: z.string(),
+  budgetId: z.string(),
+})

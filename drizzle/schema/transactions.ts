@@ -21,6 +21,7 @@ export const transactionTypesEnum = pgEnum("transaction_types", transactionTypes
 // Defines the DB table statically (build time)
 export const TransactionTable = pgTable("transactions", {
   id: uuid().primaryKey().defaultRandom(),
+  name: text().notNull(),
   userId: uuid().notNull().references(() => UserTable.id, { onDelete: "cascade" }),
   amount: numeric('amount', { precision: 12, scale: 2 }).notNull(),
   currency: varchar("currency", { length: 3 }).notNull(),

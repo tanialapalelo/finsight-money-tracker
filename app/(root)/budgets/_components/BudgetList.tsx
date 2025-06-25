@@ -1,7 +1,7 @@
 import CreateBudget from './CreateBudget'
 import BudgetItem from './BudgetItem'
-import { getListBudget } from '@/lib/actions/transaction.action'
 import { BudgetWithStats } from '@/types'
+import { getListBudget } from '@/lib/actions/budget.action';
 
 interface Props {
   userId: string;

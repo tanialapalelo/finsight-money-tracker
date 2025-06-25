@@ -80,7 +80,7 @@ const CreateBudget = ({ userId }: Props) => {
 
                 <DialogDescription>
 
-                  <div className="px-2">
+                  <div className="">
                     <Button
                       type="button"
                       variant="outline"
@@ -91,7 +91,7 @@ const CreateBudget = ({ userId }: Props) => {
                     </Button>
 
                     {openEmojiPicker && (
-                      <div className="absolute z-20">
+                      <div className="absolute z-20 mx-0">
                         <EmojiPicker
                           open={openEmojiPicker}
                           onEmojiClick={(e) => {

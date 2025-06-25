@@ -9,7 +9,7 @@ function BudgetItem({ budget }: {budget: BudgetWithStats}) {
     return perc > 100 ? 100 : perc.toFixed(2);
   };
   return (
-    <Link href={`/expenses/${budget?.id}`}>
+    <Link href={`/budgets/${budget?.id}`}>
       <div
         className="p-5 border rounded-2xl
     hover:shadow-md cursor-pointer h-[170px]"
@@ -37,7 +37,7 @@ function BudgetItem({ budget }: {budget: BudgetWithStats}) {
               ${budget.totalSpend ? budget.totalSpend : 0} Spend
             </h2>
             <h2 className="text-xs text-slate-400">
-              ${budget.amount - budget.totalSpend} Remaining
+              ${parseFloat(budget.amount) - budget.totalSpend} Remaining
             </h2>
           </div>
           <div

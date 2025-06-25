@@ -4,25 +4,15 @@ import { db } from "@/drizzle/db"
 import { BudgetTable, TransactionTable } from "@/drizzle/schema";
 import { desc, eq, getTableColumns, sql } from "drizzle-orm";
 
-
-export async function getListBudget(userId : string){
+export async function getListExpense(budgetId : string){
     try {
-        const result = await db.select({
-            ...getTableColumns(BudgetTable),
-            totalSpend: sql`
-                SUM(CASE WHEN ${TransactionTable.type} = 'expense' THEN ${TransactionTable.amount} ELSE 0 END)
-            `.mapWith(Number),
-            totalItem: sql`
-                COUNT(CASE WHEN ${TransactionTable.type} = 'expense' THEN 1 ELSE NULL END)
-            `.mapWith(Number),
-            })
-            .from(BudgetTable)
-            .leftJoin(TransactionTable, eq(BudgetTable.id, TransactionTable.budgetId))
-            .where(eq(BudgetTable.userId, userId))
-            .groupBy(BudgetTable.id)
+        const result = await db.select()
+            .from(TransactionTable)
+            .where(eq(TransactionTable.budgetId, budgetId))
             .orderBy(desc(BudgetTable.createdAt));
+            
         return result;
     } catch (error) {
-        console.error("An error occurred while getting the budgets:", error);
+        console.error("An error occurred while getting the expenses:", error);
     }
 }

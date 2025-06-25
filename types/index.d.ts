@@ -42,21 +42,15 @@ declare type Account = {
 
 declare type Transaction = {
   id: string;
-  $id: string;
   name: string;
-  paymentChannel: string;
-  type: string;
-  accountId: string;
+  type: "expense" | "income";
+  userId: string;
+  categoryId: string;
+  budgetId: string;
   amount: number;
-  pending: boolean;
-  category: string;
+  currency: string;
+  description: string;
   date: string;
-  image: string;
-  type: string;
-  $createdAt: string;
-  channel: string;
-  senderBankId: string;
-  receiverBankId: string;
 };
 
 declare type Bank = {
@@ -304,7 +298,7 @@ declare interface getBankByAccountIdProps {
 declare interface HeaderBoxProps {
   type?: "title" | "greeting";
   title: string;
-  subtext: string;
+  subtext?: string;
   user?: string;
 }
 
